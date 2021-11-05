@@ -1,36 +1,48 @@
-import { CustomSwitch } from "../../components/Switch";
 import styled, { DefaultTheme } from "styled-components/native";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  padding: 10px;
   width: 100%;
-  background-color: ${(props) => props.theme.primary};
+  height: 100%;
+  background-color: ${({ theme }) => theme.primary};
 `;
 
-export const ContainerSwitch = styled.View`
+export const Led = styled.View`
   width: 100%;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 30px;
-  margin-left: 20px;
+  height: 180px;
+
+  align-items: flex-end;
+
+  padding-right: 15px;
 `;
 
-export const Switch = styled(CustomSwitch).attrs(({ theme, isEnabled }) => ({
-  trackColor: {
-    false: theme.switch_background,
-    true: theme.switch_background,
-  },
-  thumbColor: isEnabled ? theme.switch_circle : theme.text_basic,
-}))``;
+export const Description = styled.Text`
+  font-size: 40px;
+  color: ${({ theme }) => theme.text_regular};
+  font-weight: bold;
 
-export const Image = styled.Image`
-  width: 25px;
-  height: 25px;
+  margin-bottom: 40px;
+`;
+
+export const Result = styled.Text`
+  font-size: 40px;
+  color: ${({ theme }) => theme.text_medium};
+  font-weight: bold;
 `;
 
 export const Header = styled.View`
   width: 100%;
   height: 20px;
+`;
+
+export const Buttons = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  flex: 1;
+  align-items: flex-end;
+  justify-content: flex-start;
+
+  padding: 2px;
+  margin-bottom: 4px;
 `;

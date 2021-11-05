@@ -1,6 +1,7 @@
 export const theme = {
   light: {
     primary: "#fff",
+    primary_dark: "#313131",
     secondary: "rgba(49, 49, 49, 0,71)",
     text_basic: "#fff",
     text_regular: "#6E6B6D",
@@ -10,6 +11,7 @@ export const theme = {
   },
   dark: {
     primary: "#454545",
+    primary_dark: "#313131",
     secondary: "rgba(49, 49, 49, 0,71)",
     text_basic: "#fff",
     text_regular: "#6E6B6D",
