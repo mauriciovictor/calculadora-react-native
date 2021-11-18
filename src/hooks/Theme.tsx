@@ -16,7 +16,7 @@ interface ThemeContextProps {
 const ThemeContext = createContext({} as ThemeContextProps);
 
 function AppTheme({ children }: AppThemeProps) {
-  const [themeStyle, setThemeStyle] = useState<ThemeProps>(theme.dark);
+  const [themeStyle, setThemeStyle] = useState<ThemeProps>(theme.light);
 
   function updateTheme(style?: "dark" | "light") {
     if (style === "dark") setThemeStyle(theme.dark);

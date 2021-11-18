@@ -9,11 +9,19 @@ export const Container = styled.SafeAreaView`
 
 export const Led = styled.View`
   width: 100%;
-  height: 180px;
+  height: 200px;
 
   align-items: flex-end;
 
-  padding-right: 15px;
+  padding-right: 5px;
+`;
+
+export const Footer = styled.View`
+  width: 100%;
+  height: 50px;
+  padding-bottom: 10px;
+  margin-top: 15px;
+  align-items: flex-end;
 `;
 
 export const Description = styled.Text`
@@ -21,7 +29,7 @@ export const Description = styled.Text`
   color: ${({ theme }) => theme.text_regular};
   font-weight: bold;
 
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
 
 export const Result = styled.Text`

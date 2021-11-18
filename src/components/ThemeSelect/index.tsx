@@ -23,7 +23,7 @@ export function ThemeSelect() {
 
   return (
     <Container>
-      <Image source={isEnabled ? SunActiveImage : SunImage} width={200} />
+      <Image source={isEnabled ? SunActiveImage : SunActiveImage} width={200} />
       <Switch
         isEnabled={isEnabled}
         onValueChange={handleToggleSwitch}
