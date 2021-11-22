@@ -10,6 +10,8 @@ export function Principal() {
   const [led, setLed] = useState<string[]>([]);
   const [isExistOperation, setIsExistOperation] = useState(false);
 
+  const [parenthesesCount, setParenthesesCount] = useState(0);
+
   const [description, setDescription] = useState<string>();
   const [result, setResult] = useState("");
 
@@ -26,14 +28,74 @@ export function Principal() {
 
   function handleAddOperation(operation: string) {
     if (Number(getLastItem())) {
-      setLed([...led, operation]);
+      if (operation === "()") {
+        if (getLastItem() === "(") {
+          const newLed = [...led];
+          if (Number(getLastItem())) {
+            newLed.push("*");
+          }
+
+          newLed.push("(");
+
+          setLed(newLed);
+          let newCount = parenthesesCount + 1;
+          setParenthesesCount(newCount);
+        } else {
+          if (parenthesesCount === 0) {
+            const newLed = [...led];
+            if (Number(getLastItem())) {
+              newLed.push("*");
+            }
+
+            newLed.push("(");
+
+            setLed(newLed);
+            let newCount = parenthesesCount + 1;
+            setParenthesesCount(newCount);
+          } else {
+            setLed([...led, ")"]);
+            let newCount = parenthesesCount - 1;
+            setParenthesesCount(newCount);
+          }
+        }
+      } else {
+        setLed([...led, operation]);
+      }
     } else {
       const newLedValue = [...led];
 
-      if (getLastItem() !== "0") newLedValue.pop();
+      if (operation === "()") {
+        if (
+          getLastItem() === "(" ||
+          (!Number(getLastItem()) && getLastItem() !== ")")
+        ) {
+          newLedValue.push("(");
+          let newCount = parenthesesCount + 1;
+          setParenthesesCount(newCount);
+          console.log("case1");
+        } else {
+          if (parenthesesCount === 0) {
+            newLedValue.push("(");
+            let newCount = parenthesesCount + 1;
+            setParenthesesCount(newCount);
+            console.log("case2");
+          } else {
+            newLedValue.push(")");
+            let newCount = parenthesesCount - 1;
+            setParenthesesCount(newCount);
+            console.log("case3");
+          }
+        }
+      } else {
+        if (
+          getLastItem() !== "(" ||
+          (getLastItem() === ")" && getLastItem() !== "0")
+        ) {
+          newLedValue.pop();
+        }
 
-      newLedValue.push(operation);
-
+        newLedValue.push(operation);
+      }
       setLed(newLedValue);
     }
   }
@@ -69,6 +131,7 @@ export function Principal() {
     if (
       getLastItem() !== "%" &&
       getLastItem() !== "0" &&
+      getLastItem() !== ")" &&
       !Number(getLastItem())
     ) {
       return Alert.alert("Formato usado inválido");
@@ -79,13 +142,14 @@ export function Principal() {
     const operation = eval(newCalc.join("")!);
     setLed([operation]);
 
+    setParenthesesCount(0);
     setResult("");
     setIsExistOperation(false);
   }
 
   useEffect(() => {
     setDescription((oldState) => led.join(""));
-    previwResult();
+    if (parenthesesCount === 0) previwResult();
   }, [led]);
 
   function getLastItem() {
